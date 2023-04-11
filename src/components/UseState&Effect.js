@@ -16,12 +16,12 @@ const Button = styled.div`
 `;
 
 const Container = styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction : row;
-    justify-content: center;
-    font-weight: bold;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-weight: bold;
 `;
 
 const Cont = styled.div`
@@ -34,33 +34,32 @@ const Cont = styled.div`
 `;
 
 const Content = styled.div`
-    width: 8rem;
-    height: 2rem;
-    border: 1px solid black;
-    background-color: gray;
-    box-shadow: 2px 5px 0px 0.5px black;
+  width: 8rem;
+  height: 2rem;
+  border: 1px solid black;
+  background-color: gray;
+  box-shadow: 2px 5px 0px 0.5px black;
 `;
 export default function SamplePage() {
-    const [counter_1,setCounter_1] = useState(0);
-    const [counter_2,setCounter_2] = useState(0);
+  const [counter_1, setCounter_1] = useState(0);
+  const [counter_2, setCounter_2] = useState(0);
 
-    useEffect( () =>{
-        console.log(counter_1);
-    },[counter_1]);
-    return(
+  useEffect(() => {
+    console.log(counter_1);
+  }, [counter_1]);
+
+  return (
     <>
-    <Container>
+      <Container>
         <Cont>
-        <Button onClick={() => setCounter_1(counter_1+1)} >Click Me</Button>
-        <Content>{`Counter 1: ${counter_1}`}</Content>
+          <Button onClick={() => setCounter_1(counter_1 + 1)}>Click Me</Button>
+          <Content>{`Counter 1: ${counter_1}`}</Content>
         </Cont>
         <Cont>
-        <Button onClick={() => setCounter_2(counter_2+1)}>Click Me</Button>
-        <Content>{`Counter 1: ${counter_2}`}</Content>
+          <Button onClick={() => setCounter_2(counter_2 + 1)}>Click Me</Button>
+          <Content>{`Counter 1: ${counter_2}`}</Content>
         </Cont>
-        
-
-    </Container>    
+      </Container>
     </>
-    );
+  );
 }

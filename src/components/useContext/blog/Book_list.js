@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { CurrencyContext } from "./currency-context";
+import { CurrencyProvider, useCurrency, Currencies } from "./currency-context";
 
 const DATA = [
   {
@@ -14,32 +13,19 @@ const DATA = [
   },
 ];
 
-const Currencies = {
-  Euro: {
-    code: "EUR",
-    label: "Euro",
-    conversionRate: 1,
-  },
-  USD: {
-    code: "USD",
-    label: "US Dollar",
-    conversionRate: 1.19,
-  },
-};
-
 const Book_list = () => {
-  const [currency, setCurrency] = useState(Currencies.Euro);
-
   return (
-    <CurrencyContext.Provider value={currency}>
-      <CurrencyButtons onChange={setCurrency} />
+    <CurrencyProvider>
+      <CurrencyButtons />
 
       <Books list={DATA} />
-    </CurrencyContext.Provider>
+    </CurrencyProvider>
   );
 };
 
-const CurrencyButtons = ({ onChange }) => {
+const CurrencyButtons = () => {
+  const { onChange } = useCurrency();
+
   return Object.values(Currencies).map((item) => (
     <CurrencyButton key={item.label} onClick={() => onChange(item)}>
       {item.label}
@@ -62,12 +48,12 @@ const Books = ({ list }) => {
 };
 
 const Book = ({ item }) => {
-  const currency = useContext(CurrencyContext);
+  const { value } = useCurrency();
 
   const price = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: currency.code,
-  }).format(item.price * currency.conversionRate);
+    currency: value.code,
+  }).format(item.price * value.conversionRate);
 
   return (
     <li>
